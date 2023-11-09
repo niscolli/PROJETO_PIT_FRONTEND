@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="card">
+    <p-table [value]="compras" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Produto</th>
+          <th>Quantidade</th>
+          <th>Valor</th>
+          <th>Endereço</th>
+          <th>Telefone</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-compra>
+        <tr>
+          <td>{{ compra.produto }}</td>
+          <td>{{ compra.quantidade }}</td>
+          <td>{{ compra.valor }}</td>
+          <td>{{ compra.endereco }}</td>
+          <td>{{ compra.telefone }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

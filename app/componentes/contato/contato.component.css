@@ -1,0 +1,23 @@
+button {
+  background-color: #86654b;
+  color: white;
+}
+
+button:hover {
+  background-color: #5a4332;
+  color: white;
+}
+
+button:active {
+  background-color: #433023;
+}
+
+.row {
+  margin-top: 3rem;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .descricaoContato {
+    margin-bottom: 2rem;
+  }
+}

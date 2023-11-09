@@ -1,0 +1,12 @@
+.titulo {
+  display: flex;
+  justify-content: center;
+}
+
+.row {
+  text-align: center;
+}
+
+p-button[ng-reflect-disabled="true"] {
+  cursor: not-allowed;
+}

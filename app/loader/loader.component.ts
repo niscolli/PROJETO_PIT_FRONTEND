@@ -1,0 +1,20 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-loader',
+  templateUrl: './loader.component.html',
+  styleUrls: ['./loader.component.css'],
+})
+export class LoaderComponent {
+  isLoading: boolean = false;
+
+  // Método que inicia o carregamento
+  startLoading() {
+    this.isLoading = true;
+  }
+
+  // Método que encerra o carregamento
+  stopLoading() {
+    this.isLoading = false;
+  }
+}
