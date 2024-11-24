@@ -1,12 +1,23 @@
 img {
   width: 100%;
   object-fit: cover;
+
+}
+.text > li {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #5a4332;
 }
 
 button {
-  background-color: #86654b;
+  border-radius: 20px;
+  padding: 5px 2px;
+  background-color: #d44200;
   color: white;
   width: 30%;
+  height: 50%;
+  font-weight: bold;
+  letter-spacing: 1px;
   align-items: center;
   text-align: center;
 }
