@@ -1,12 +1,40 @@
 img {
   width: 100%;
   object-fit: cover;
+
+}
+
+.container {
+  background-color: #692100b2;
+  border-radius: 50px;
+  margin-top: 20px;
+}
+
+.col-xs-12.col-md-6 {
+  background-color: #ffffffd0;
+  border-radius: 50px;
+  padding: 0%;
+}
+
+.col-xs-12.col-md-2 {
+  margin-top: 3%;
+}
+
+.text>li {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #5a4332;
 }
 
 button {
-  background-color: #86654b;
+  border-radius: 20px;
+  padding: 5px 2px;
+  background-color: #d44200;
   color: white;
   width: 30%;
+  height: 50%;
+  font-weight: bold;
+  letter-spacing: 1px;
   align-items: center;
   text-align: center;
 }
