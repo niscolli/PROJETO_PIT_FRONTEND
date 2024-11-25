@@ -3,10 +3,29 @@
   justify-content: center;
 }
 
+.titulo > h2 {
+  font-size: 50px;
+  color: #692100 !important;
+}
+
 .row {
   text-align: center;
 }
 
 p-button[ng-reflect-disabled="true"] {
   cursor: not-allowed;
+}
+
+::ng-deep .p-button-secondary {
+  background: #692100 !important;
+  color: #fff !important;
+}
+
+.p-button-danger {
+  background-color: #f44336;
+  color: white;
+}
+
+.p-button {
+  cursor: pointer;
 }

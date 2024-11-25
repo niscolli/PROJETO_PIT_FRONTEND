@@ -72,6 +72,11 @@ img {
   color: #84eec1;
 }
 
+.py-5 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
 @media (min-width: 576px) {
   .container {
     width: 540px;

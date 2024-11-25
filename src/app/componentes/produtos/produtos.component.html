@@ -1,15 +1,16 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-md-12 titulo">
-      <h2>Nossa Loja:</h2>
+      <h2>NOSSOS PRODUTOS</h2>
     </div>
   </div>
   <br />
   <div class="row">
-    <h5>Escolha abaixo os produtos que deseja e adicione no carrinho.</h5>
-    <h5>
-      Após selecionar tudo que deseja, clique em Finalizar Compra logo abaixo
-    </h5>
+    <h6 style="font-family: 'Poppins', sans-serif; font-style: italic">
+      Escolha abaixo os produtos que deseja e adicione no carrinho, após
+      selecionar tudo <br />
+      que deseja, clique em "Finalizar compra" logo abaixo:
+    </h6>
   </div>
   <br />
   <div class="container-fluid">
@@ -23,13 +24,23 @@
         <div
           class="border-1 surface-border border-round m-2 text-center py-5 px-3"
         >
-          <div class="mb-3">
+          <div class="position-relative">
             <img
-              src="{{ product.image }}"
+              [src]="product.image"
               [alt]="product.name"
               class="w-6 shadow-2"
               style="width: 100%; height: 9em"
             />
+
+            <p-button
+              *ngIf="getCartQuantity(product) > 0"
+              icon="pi pi-times"
+              styleClass="p-button-rounded p-button-danger p-button-outlined p-button-sm"
+              (click)="confirmarRemocaoProduto(product)"
+              style="position: absolute; top: 5px; right: 5px; background-color: #fff; border-radius: 30px; font-size: 18px !important;"
+            >
+              </p-button
+            >
           </div>
           <div>
             <h4 class="mb-1">{{ product.name }}</h4>
@@ -40,10 +51,10 @@
             ></p-tag>
             <div class="car-buttons mt-5">
               <p-button
-                label="Comprar"
-                icon="pi pi-users"
+                label="Carrinho"
+                icon="pi pi-plus"
                 styleClass="p-button-secondary"
-                (click)="showDialog(product)"
+                (click)="adicionarAoCarrinho(product)"
                 [disabled]="product.inventoryStatus === 'OUTOFSTOCK'"
               ></p-button>
             </div>
@@ -51,76 +62,22 @@
         </div>
       </ng-template>
     </p-carousel>
-    <p-dialog
-      header="Header"
-      [(visible)]="visible"
-      [modal]="true"
-      [style]="{ width: '50vw' }"
-    >
-      <ng-template pTemplate="header">
-        <span class="text-xl font-bold"
-          >Produto: {{ this.produtoAtual.name }}</span
-        >
-      </ng-template>
-      <div class="row">
-        <div class="col">
-          <form class="formularioEmail">
-            <div class="mb-3">
-              <label for="nome" class="form-label">Rua:</label>
-              <input
-                type="text"
-                class="form-control"
-                id="nome"
-                [(ngModel)]="rua"
-                [ngModelOptions]="{ standalone: true }"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="numero" class="form-label">Numero da Rua:</label>
-              <input
-                type="number"
-                class="form-control"
-                id="numero"
-                [(ngModel)]="numero"
-                [ngModelOptions]="{ standalone: true }"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="quantidade" class="form-label">Quantidade:</label>
-              <input
-                type="number"
-                class="form-control"
-                id="quantidade"
-                [(ngModel)]="quantidade"
-                [ngModelOptions]="{ standalone: true }"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="telefone" class="form-label">Telefone:</label>
-              <p-inputMask
-                mask="(99) 99999-9999"
-                [(ngModel)]="telefone"
-                [ngModelOptions]="{ standalone: true }"
-                placeholder="(99) 99999-9999"
-              ></p-inputMask>
-            </div>
-          </form>
-        </div>
-      </div>
 
-      <ng-template pTemplate="footer">
-        <p-button
-          icon="pi pi-check"
-          (click)="visible = false"
-          label="Comprar"
-          styleClass="p-button-text"
-          (click)="persistirCompra(); visible = false"
-        ></p-button>
-      </ng-template>
-    </p-dialog>
+    <div class="d-flex justify-content-center my-4">
+      <p-button
+        label="Finalizar compra"
+        icon="pi pi-check"
+        styleClass="p-button-success"
+        (click)="finalizarCompra()"
+      ></p-button>
+    </div>
+
     <p-toast></p-toast>
+
     <div *ngIf="isLoading">
       <app-loader></app-loader>
     </div>
   </div>
 </div>
+
+<p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
