@@ -7,6 +7,7 @@ import { ContatoComponent } from './componentes/contato/contato.component';
 import { ProdutosComponent } from './componentes/produtos/produtos.component';
 import { CabecalhoComponent } from './componentes/cabecalho/cabecalho.component';
 import { RelatoriosComponent } from './componentes/relatorios/relatorios.component';
+import { FinalizarCompraComponent } from './componentes/finalizar-compra/finalizar-compra.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,7 @@ const routes: Routes = [
     path: 'adm/relatorios',
     component: RelatoriosComponent,
   },
+  { path: 'finalizar-compra', component: FinalizarCompraComponent }
 ];
 
 @NgModule({
