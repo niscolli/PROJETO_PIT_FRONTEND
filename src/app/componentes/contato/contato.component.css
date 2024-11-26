@@ -1,15 +1,12 @@
 .titulo {
   font-size: 50px;
   color: #692100 !important;
-  /* colocar contato no centro, tem q tirar da coluna flex n sei como faz */
 }
 
-/* pra colocar o nome dos input do lado inves de em cima, gepeto falou que é com flex */
 .mb-3 {
   text-transform: uppercase;
   font-size: small;
   letter-spacing: 1px;
-  background-color: #dddddd;
   color: #000;
   font-weight: 700;
 }
@@ -32,7 +29,7 @@
   text-align: center;
   font-size: x-large;
 }
-/* perguntar davi sobre o hiperlink... eu fiz colocando esse display inline-block */
+
 .email {
   display: inline-block;
   margin-left: 150px;
