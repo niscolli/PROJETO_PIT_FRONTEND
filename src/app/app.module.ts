@@ -27,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoaderComponent } from './loader/loader.component';
 import { TableModule } from 'primeng/table';
 import { RelatoriosComponent } from './componentes/relatorios/relatorios.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { RelatoriosComponent } from './componentes/relatorios/relatorios.compone
     InputNumberModule,
     HttpClientModule,
     TableModule,
+    ConfirmDialogModule
   ],
   providers: [ProductService, MessageService],
   bootstrap: [AppComponent],

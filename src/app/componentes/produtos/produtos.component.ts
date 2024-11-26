@@ -1,58 +1,26 @@
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
-import { Compra } from 'src/app/Models/compra.models';
-import { Product } from 'src/app/Models/product.models';
-import { PitServiceService } from 'src/app/services/pit.service.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/services/product.service';
+import { CartService } from 'src/app/services/cart.service';
+import { Product } from 'src/app/Models/product.models';
 
 @Component({
   selector: 'app-produtos',
   templateUrl: './produtos.component.html',
   styleUrls: ['./produtos.component.css'],
-  animations: [
-    trigger('slideInOut', [
-      state(
-        'in',
-        style({
-          transform: 'translate3d(0, 0, 0)',
-        })
-      ),
-      state(
-        'out',
-        style({
-          transform: 'translate3d(100%, 0, 0)',
-        })
-      ),
-      transition('in => out', animate('400ms ease-in-out')),
-      transition('out => in', animate('400ms ease-in-out')),
-    ]),
-  ],
+  providers: [ConfirmationService]
 })
 export class ProdutosComponent implements OnInit {
   products: Product[] = [];
-
   responsiveOptions: any[] = [];
-  visible: boolean = false;
-
-  produtoAtual!: Product;
-  rua!: any;
-  numero: any = '';
-  telefone: string = '';
-  quantidade!: number;
-
+  cartItems: any[] = [];
   isLoading: boolean = false;
 
   constructor(
     private productService: ProductService,
-    private messageService: MessageService,
-    private pitService: PitServiceService
+    private cartService: CartService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -79,59 +47,48 @@ export class ProdutosComponent implements OnInit {
     ];
   }
 
-  showDialog(item: any) {
-    if (item.inventoryStatus === 'Sem Estoque') {
-      this.messageService.add({
-        severity: 'warn',
-        summary: 'Atenção',
-        detail: 'Esse item está indisponível no momento',
-      });
-      this.visible = false;
-    } else {
-      this.visible = true;
-      this.rua = '';
-      this.numero = '';
-      this.telefone = '';
-      this.quantidade = 1;
-      this.produtoAtual = item;
-    }
+  // Verifica a quantidade do produto no carrinho
+  getCartQuantity(product: Product): number {
+    const cartItem = this.cartItems.find(item => item.id === product.id);
+    return cartItem ? cartItem.quantity : 0;
   }
 
-  async persistirCompra() {
-    this.isLoading = true;
-    const valor =
-      this.produtoAtual && this.produtoAtual.price !== undefined
-        ? this.produtoAtual.price
-        : 0;
-
-    const endereco = `${this.rua}, ${this.numero}`;
-
-    let telefone = this.telefone.replace(/[^0-9]/g, '');
-    let telefoneNumerico = parseInt(telefone, 10);
-
-    const nomeProduto =
-      this.produtoAtual && this.produtoAtual.name !== undefined
-        ? this.produtoAtual.name
-        : '';
-
-    const novaCompra: Compra = new Compra(
-      this.quantidade,
-      valor,
-      endereco,
-      telefoneNumerico,
-      nomeProduto
-    );
-
-    this.isLoading = true;
-
-    const resultado: boolean = await this.pitService.persistirCompra(
-      novaCompra
-    );
-    if (!resultado) {
-      this.isLoading = resultado;
-    }
+  // Adicionar produto ao carrinho
+  adicionarAoCarrinho(product: any) {
+    this.cartService.addProductToCart(product);
+    this.cartItems = this.cartService.getCartItems();
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Adicionado ao Carrinho',
+      detail: `${product.name} adicionado com sucesso!`
+    });
   }
 
+  // Confirmação para remover produto do carrinho
+  confirmarRemocaoProduto(product: any) {
+    this.confirmationService.confirm({
+      message: `Você tem certeza que deseja remover ${product.name} do seu carrinho?`,
+      header: 'Confirmação',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.cartService.removeProductFromCart(product.id);
+        this.cartItems = this.cartService.getCartItems();
+        this.messageService.add({
+          severity: 'info',
+          summary: 'Removido do Carrinho',
+          detail: `${product.name} removido do carrinho.`
+        });
+      }
+    });
+  }
+
+  // Finalizar a compra (apenas loga os itens do carrinho)
+  finalizarCompra() {
+    const cartItems = this.cartService.getCartItems();
+    console.log("Itens no carrinho:", cartItems);
+  }
+
+  // Para definir o status do produto (estoque)
   getSeverity(status: string) {
     switch (status) {
       case 'Em Estoque':
