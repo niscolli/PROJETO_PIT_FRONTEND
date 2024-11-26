@@ -10,7 +10,7 @@ export class ProductService {
         name: 'Café Espresso',
         description: 'Product Description',
         image:
-          'https://img.elo7.com.br/product/zoom/268423E/painel-adesivo-cappuccino-cafe-expresso-leite-p-comercio-hd-parede.jpg',
+          'https://conscienciacafe.com.br/wp-content/uploads/2023/09/cafe-espresso-maquina-1024x683.jpg',
         price: 10,
         category: 'Accessories',
         quantity: 24,
@@ -36,7 +36,7 @@ export class ProductService {
         name: 'Latte Macchiato',
         description: 'Product Description',
         image:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwnYt9l-ysJlJUCtv3I1feGpqcRUANq6kjfQ&usqp=CAU',
+          'https://upload.wikimedia.org/wikipedia/commons/2/2b/Latte_macchiato.jpg',
         price: 20,
         category: 'Fitness',
         quantity: 2,
@@ -46,10 +46,10 @@ export class ProductService {
       {
         id: '1003',
         code: '244wgerg2',
-        name: 'Macchiatela',
+        name: 'Macchiatella',
         description: 'Product Description',
         image:
-          'https://sinhabenta.com.br/wp-content/uploads/2019/07/ice-cappuccino2.png',
+          'https://foodisafourletterword.com/wp-content/uploads/2022/01/Nutella_Mocha_Latte_Recipe.jpg',
         price: 29,
         category: 'Clothing',
         quantity: 25,

@@ -1,4 +1,9 @@
 .titulo {
+  display: flex;
+  justify-content: center;
+}
+
+.titulo > h2 {
   font-size: 50px;
   color: #692100 !important;
 }
