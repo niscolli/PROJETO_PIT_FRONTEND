@@ -3,6 +3,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/services/product.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Product } from 'src/app/Models/product.models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-produtos',
@@ -20,7 +21,8 @@ export class ProdutosComponent implements OnInit {
     private productService: ProductService,
     private cartService: CartService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -45,6 +47,8 @@ export class ProdutosComponent implements OnInit {
         numScroll: 1,
       },
     ];
+
+    this.cartItems = this.cartService.getCartItems();
   }
 
   // Verifica a quantidade do produto no carrinho
@@ -82,10 +86,9 @@ export class ProdutosComponent implements OnInit {
     });
   }
 
-  // Finalizar a compra (apenas loga os itens do carrinho)
+  // Navegar para a tela de finalização de compra
   finalizarCompra() {
-    const cartItems = this.cartService.getCartItems();
-    console.log("Itens no carrinho:", cartItems);
+    this.router.navigate(['/finalizar-compra']);
   }
 
   // Para definir o status do produto (estoque)
